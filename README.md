@@ -4,7 +4,9 @@ A lightweight **HTMX extension** for handling **client-side routes** and **mocki
 Useful for prototyping, testing, or adding custom frontend logic before hitting the server.
 
 ## Coming Soon!!!
->Work in progress!
+
+> Work in progress!
+> ..
 
 ## Features
 
@@ -14,6 +16,7 @@ Useful for prototyping, testing, or adding custom frontend logic before hitting 
 - Great for prototyping or mocking APIs
 
 ## Installation
+
 Include the script after loading HTMX:
 
 ```html
@@ -24,11 +27,12 @@ Include the script after loading HTMX:
 > or install via npm:
 
 ```bash
-npm install htmx.org 
+npm install htmx.org
 npm install htmx-client-routes
 ```
 
 ## Usage
+
 Define routes using `htmxClientRoutes.addRoute`:
 
 ```tsx
@@ -42,11 +46,10 @@ addRoute<Params>(
     params: { index },
   }) => `<button hx-get="/clicked/${index + 1}" hx-swap="outerHTML">
     Hey, you clicked me! (${index})
-  </button>`,
+  </button>`
 );
 
 function App() {
-
   return (
     <>
       <button hx-get="/clicked/0" hx-swap="outerHTML">
