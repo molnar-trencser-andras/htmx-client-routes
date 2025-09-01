@@ -1,0 +1,28 @@
+import "./App.css";
+import { initHtmxClientRoutes } from "./shared/utils/htmx-client-routes";
+import "./route";
+
+initHtmxClientRoutes();
+
+function App() {
+  return (
+    <>
+      <button hx-get="/clicked/0" hx-swap="outerHTML">
+        Click to replace!
+      </button>
+
+      <p>The DemoComp below is loaded by htmx when you scroll down to it.</p>
+
+      <div
+        style={{ marginTop: "100vh" }}
+        hx-get="/load/DemoComp"
+        hx-swap="innerHTML"
+        hx-trigger="revealed"
+      >
+        Component placeholder
+      </div>
+    </>
+  );
+}
+
+export default App;
