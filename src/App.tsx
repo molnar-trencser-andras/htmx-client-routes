@@ -7,6 +7,10 @@ initHtmxClientRoutes();
 function App() {
   return (
     <>
+      <h1 hx-get="/hello" hx-trigger="load">
+        ..........
+      </h1>
+
       <button hx-get="/clicked/0" hx-swap="outerHTML">
         Click to replace!
       </button>
