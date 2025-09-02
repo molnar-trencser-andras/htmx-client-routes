@@ -6,7 +6,7 @@ type HtmxEvent = CustomEvent & {
   detail: HtmxEventDetail;
 };
 
-export const initHtmxClientRoutes = (): void => {
+const initHtmxClientRoutes = (): void => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (document.body as any).addEventListener(
     "htmx:configRequest",
@@ -44,6 +44,8 @@ export const initHtmxClientRoutes = (): void => {
           } as HtmxSwapSpecification);
         }
       }
-    },
+    }
   );
 };
+
+initHtmxClientRoutes();

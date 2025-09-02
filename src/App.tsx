@@ -1,8 +1,5 @@
 import "./App.css";
-import { initHtmxClientRoutes } from "./shared/utils/htmx-client-routes";
 import "./route";
-
-initHtmxClientRoutes();
 
 function App() {
   return (

@@ -1,8 +1,8 @@
-import { addRoute } from "./shared/utils/routes";
+import { addRoute } from "./shared/utils";
 import { loadReactComponent, setLoader } from "./shared/utils/htmx-react";
 import React from "react";
 import { callMockApi } from "./api";
-import type { ParamType, RouteHandler } from "./shared/utils/types";
+import type { ParamType, RouteHandler } from "./shared/utils";
 
 interface ClickedParams extends ParamType {
   index: number;
