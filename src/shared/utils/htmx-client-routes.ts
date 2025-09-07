@@ -39,12 +39,13 @@ const initHtmxClientRoutes = (): void => {
 
         if (responseHTML) {
           const swap = elt.getAttribute("hx-swap") || "innerHTML";
+
           htmx.swap(target, responseHTML, {
             swapStyle: swap,
           } as HtmxSwapSpecification);
         }
       }
-    }
+    },
   );
 };
 
