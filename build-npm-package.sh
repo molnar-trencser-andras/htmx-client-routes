@@ -33,6 +33,18 @@ echo "Copying built files to test directory..."
 cp -r dist tmp/test-package/
 cp package.npm.json tmp/test-package/package.json
 cp README.npm.md tmp/test-package/README.md
+cp rollup.config.js tmp/test-package/
+cp tsconfig.npm.json tmp/test-package/tsconfig.json
+
+# Install dependencies in the test package directory
+echo "Installing dependencies in test package directory..."
+cd tmp/test-package
+
+# Módosítjuk a package.json fájlt, hogy ne legyen benne prepublishOnly szkript
+sed -i 's/"prepublishOnly": "pnpm run build"/"_prepublishOnly": "pnpm run build"/g' package.json
+
+pnpm install --no-frozen-lockfile
+cd ../..
 
 echo "Package built successfully!"
 echo "Test package is available in tmp/test-package/"
