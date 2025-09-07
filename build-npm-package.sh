@@ -43,7 +43,8 @@ cd tmp/test-package
 # Módosítjuk a package.json fájlt, hogy ne legyen benne prepublishOnly szkript
 sed -i 's/"prepublishOnly": "pnpm run build"/"_prepublishOnly": "pnpm run build"/g' package.json
 
-pnpm install --no-frozen-lockfile
+# Telepítjük a függőségeket, de kihagyjuk a Cypress-t
+pnpm install --no-frozen-lockfile --ignore-workspace-root-check --ignore-scripts
 cd ../..
 
 echo "Package built successfully!"
