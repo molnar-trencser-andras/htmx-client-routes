@@ -21,8 +21,8 @@ cp package.npm.json package.json.tmp
 
 # Build the package
 echo "Building package..."
-npx tsc --project tsconfig.npm.json
-npx rollup -c
+pnpm exec tsc --project tsconfig.npm.json
+pnpm exec rollup -c
 
 # Create a temporary directory for testing the package
 echo "Creating test directory..."
