@@ -11,6 +11,9 @@ Useful for prototyping, testing, or adding custom frontend logic before hitting 
 - Intercept HTMX requests and perform extra logic before sending them to the server
 - Great for prototyping or mocking APIs
 
+## Demo
+[demo](https://codepen.io/Andr-s-Moln-r-Trencs-r/pen/WbQmGGp)
+
 ## Installation
 
 ### NPM
