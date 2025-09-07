@@ -1,6 +1,15 @@
 # HTMX Client Routes
 
-A client-side routing extension for HTMX that allows you to define and handle routes directly in the browser without server-side navigation.
+
+A lightweight **HTMX extension** for handling **client-side routes** and **mocking server responses**.  
+Useful for prototyping, testing, or adding custom frontend logic before hitting the server.
+
+## Features
+
+- Define client-side routes directly in the frontend
+- Return custom responses without a backend
+- Intercept HTMX requests and perform extra logic before sending them to the server
+- Great for prototyping or mocking APIs
 
 ## Installation
 
