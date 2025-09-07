@@ -9,7 +9,7 @@ echo "Building htmx-client-routes npm package..."
 
 # Install required dependencies
 echo "Installing dependencies..."
-pnpm install -D rimraf rollup rollup-plugin-terser rollup-plugin-typescript2
+pnpm install -D -w rimraf rollup rollup-plugin-terser rollup-plugin-typescript2
 
 # Clean dist directory
 echo "Cleaning dist directory..."
