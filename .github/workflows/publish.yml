@@ -42,8 +42,11 @@ jobs:
           rm -f pnpm-lock.yaml
           pnpm install --no-frozen-lockfile
 
-      - name: Build
-        run: pnpm run build-npm
+      - name: Make build script executable
+        run: chmod +x ./build-npm-package.sh
+
+      - name: Build package
+        run: ./build-npm-package.sh
 
       - name: Publish
         run: cd tmp/test-package && pnpm publish --access public --no-git-checks
