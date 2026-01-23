@@ -11,35 +11,15 @@ import { watchAfterRendered } from "../shared/utils/htmx-functions";
 import { isUrlFromString, isUrl, createUrlPattern } from "../shared/utils/url";
 import { debounce } from "../shared/utils/debounce";
 
-// Re-export all the types and functions
-export type {
-  HtmxEventDetail,
-  ParamType,
-  Route,
-  RouteHandler,
-  HandlerFunctionParams,
-} from "../shared/utils/types";
-
-export {
-  clearParams,
-  getRoute,
-  getRouteParams,
-  addRoute,
-  watchAfterRendered,
-  isUrlFromString,
-  isUrl,
-  createUrlPattern,
-  debounce,
-};
-
 // Note: React integration is available as a separate import:
 // import { loadReactComponent } from 'htmx-client-routes/react';
 
 // Initialize the extension
 const htmxClientRoutes = {
-  init: function () {
+  init: function (parentElt?: HTMLElement): void {
+    const rootElt = parentElt || document.body;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (document.body as any).addEventListener(
+    (rootElt as any).addEventListener(
       "htmx:configRequest",
       async (evt: CustomEvent & { detail: HtmxEventDetail }) => {
         const {
@@ -77,7 +57,7 @@ const htmxClientRoutes = {
             } as HtmxSwapSpecification);
           }
         }
-      }
+      },
     );
 
     console.log("htmx-client-routes initialized");
@@ -104,5 +84,29 @@ if (typeof htmx !== "undefined") {
     },
   });
 }
+
+const init = htmxClientRoutes.init;
+
+// Re-export all the types and functions
+export type {
+  HtmxEventDetail,
+  ParamType,
+  Route,
+  RouteHandler,
+  HandlerFunctionParams,
+} from "../shared/utils/types";
+
+export {
+  clearParams,
+  getRoute,
+  getRouteParams,
+  addRoute,
+  watchAfterRendered,
+  isUrlFromString,
+  isUrl,
+  createUrlPattern,
+  debounce,
+  init,
+};
 
 export default htmxClientRoutes;
