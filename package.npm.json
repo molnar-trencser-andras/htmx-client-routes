@@ -1,6 +1,6 @@
 {
   "name": "htmx-client-routes",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Client-side routing extension for HTMX",
   "type": "module",
   "main": "dist/index.js",
@@ -8,19 +8,12 @@
   "types": "dist/index.d.ts",
   "unpkg": "dist/htmx-client-routes.min.js",
   "jsdelivr": "dist/htmx-client-routes.min.js",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "build": "rimraf dist && tsc && rollup -c",
     "prepublishOnly": "pnpm run build"
   },
-  "keywords": [
-    "htmx",
-    "routing",
-    "client-side",
-    "extension"
-  ],
+  "keywords": ["htmx", "routing", "client-side", "extension"],
   "author": "",
   "license": "MIT",
   "peerDependencies": {

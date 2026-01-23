@@ -1,6 +1,6 @@
 {
   "name": "htmx-client-routes",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Client-side routing extension for HTMX",
   "type": "module",
   "main": "dist/index.js",
@@ -56,5 +56,4 @@
     "vite": "^7.1.4",
     "vitest": "^3.2.4"
   }
-
 }
