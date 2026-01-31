@@ -37,8 +37,8 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "htmx.org": "^2.0.6",
     "@eslint/js": "^9.34.0",
+    "@rollup/plugin-terser": "^0.4.4",
     "@types/react": "^19.1.12",
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react-swc": "^4.0.1",
@@ -47,11 +47,11 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.3.0",
+    "htmx.org": "^2.0.6",
     "rimraf": "^6.0.1",
     "rollup": "^4.50.0",
-    "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.36.0",
-    "typescript": "~5.8.3",
+    "typescript": "~5.9.3",
     "typescript-eslint": "^8.41.0",
     "vite": "^7.1.4",
     "vitest": "^3.2.4"
