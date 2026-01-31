@@ -30,7 +30,9 @@ describe("addRoute és getRoute", () => {
 
 describe("clearParams", () => {
   it("should clear array params correctly", () => {
-    const orig = { "a[]": 1, "a[]": 2, b: "x" };
+    // Simulate multiple array params - in real usage this comes from URL parsing
+    // We need to call clearParams with sequential keys since object literals can't have duplicate keys
+    const orig = { "a[0]": 1, "a[]": 2, b: "x" };
     const cleared = clearParams(orig);
     expect(cleared).toHaveProperty("a");
     expect(cleared).toHaveProperty("b", "x");
