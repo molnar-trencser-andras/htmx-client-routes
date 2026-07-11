@@ -1,5 +1,5 @@
 // htmx-client-routes npm package entry point
-import htmx, { type HtmxSwapSpecification } from "htmx.org";
+import htmx from "htmx.org";
 import type { HtmxEventDetail } from "../shared/utils/types";
 import {
   clearParams,
@@ -11,54 +11,73 @@ import { watchAfterRendered } from "../shared/utils/htmx-functions";
 import { isUrlFromString, isUrl, createUrlPattern } from "../shared/utils/url";
 import { debounce } from "../shared/utils/debounce";
 
-// Note: React integration is available as a separate import:
-// import { loadReactComponent } from 'htmx-client-routes/react';
+// htmx 4 carries request values in `ctx.request.body` (FormData) instead of the
+// old `requestConfig.parameters` proxy. Convert it to a plain object for clearParams.
+const formDataToParams = (formData?: FormData): Record<string, unknown> => {
+  if (!formData) return {};
+  const obj: Record<string, unknown> = {};
+  formData.forEach((value, key) => {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      const existing = obj[key];
+      obj[key] = Array.isArray(existing) ? [...existing, value] : [existing, value];
+    } else {
+      obj[key] = value;
+    }
+  });
+  return obj;
+};
+
+// Guard against double-binding the listener if init() is called more than once.
+const boundRoots = new WeakSet<EventTarget>();
 
 // Initialize the extension
+const onConfigRequest: EventListener = async (evt) => {
+  const { ctx } = (evt as CustomEvent & { detail: HtmxEventDetail }).detail;
+  const path = ctx.request.action;
+  const target = ctx.target;
+  const elt = ctx.sourceElement as HTMLElement;
+
+  const route = getRoute(path);
+  if (route) {
+    evt.preventDefault();
+    const { handler } = route;
+    let responseHTML;
+
+    if (typeof handler === "function") {
+      const ret = await handler({
+        params: {
+          ...getRouteParams(path, route),
+          ...clearParams(formDataToParams(ctx.request.body)),
+        },
+        elt,
+      });
+
+      if (ret) {
+        responseHTML = ret as string;
+      }
+    } else if (typeof handler === "string") {
+      responseHTML = handler;
+    }
+
+    if (responseHTML) {
+      const swap = elt.getAttribute("hx-swap") || htmx.config.defaultSwap;
+      await htmx.swap({
+        text: responseHTML,
+        sourceElement: elt,
+        target,
+        swap,
+      });
+    }
+  }
+};
+
 const htmxClientRoutes = {
   init: function (parentElt?: HTMLElement): void {
     const rootElt = parentElt || document.body;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (rootElt as any).addEventListener(
-      "htmx:configRequest",
-      async (evt: CustomEvent & { detail: HtmxEventDetail }) => {
-        const {
-          detail: { path, target, elt, requestConfig },
-        } = evt;
+    if (boundRoots.has(rootElt)) return;
+    boundRoots.add(rootElt);
 
-        const route = getRoute(path);
-        if (route) {
-          evt.preventDefault();
-          const { handler } = route;
-          let responseHTML;
-
-          if (typeof handler === "function") {
-            const ret = await handler({
-              params: {
-                ...getRouteParams(path, route),
-                ...clearParams(requestConfig?.parameters || {}),
-              },
-              elt,
-            });
-
-            if (ret) {
-              responseHTML = ret as string;
-            }
-          } else if (typeof handler === "string") {
-            responseHTML = handler;
-          }
-
-          if (responseHTML) {
-            const swap = elt.getAttribute("hx-swap") || "innerHTML";
-            htmx.swap(target, responseHTML, {
-              swapStyle: swap,
-              swapDelay: 0,
-              settleDelay: 20,
-            } as HtmxSwapSpecification);
-          }
-        }
-      },
-    );
+    rootElt.addEventListener("htmx:config:request", onConfigRequest);
 
     console.log("htmx-client-routes initialized");
   },
@@ -73,14 +92,14 @@ if (typeof window !== "undefined" && window.document) {
   });
 }
 
-// Register as an htmx extension
+// Register as an htmx 4 extension. htmx 4 removed the callback-based extension
+// API (onEvent/transformResponse/...) in favour of event hooks; registerExtension's
+// `init()` is called by htmx when the extension loads (e.g. via `hx-ext`), which
+// replaces the old `htmx:load` re-init behaviour.
 if (typeof htmx !== "undefined") {
-  htmx.defineExtension("client-routes", {
-    onEvent: function (name: string): boolean {
-      if (name === "htmx:load") {
-        htmxClientRoutes.init();
-      }
-      return true;
+  htmx.registerExtension("client-routes", {
+    init: function (): void {
+      htmxClientRoutes.init();
     },
   });
 }

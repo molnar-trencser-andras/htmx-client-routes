@@ -1,4 +1,19 @@
-import type { HtmxRequestConfig } from "htmx.org";
+// htmx 4 does not export request/config types anymore. This is a minimal
+// subset of the internal request context passed via the `htmx:config:request`
+// event detail (`evt.detail.ctx`). Field names follow htmx 4's #createRequestContext.
+export interface HtmxRequestContext {
+  sourceElement: Element;
+  target: Element;
+  swap?: string;
+  request: {
+    action: string;
+    method: string;
+    body?: FormData;
+    headers?: Record<string, string>;
+    [key: string]: unknown;
+  };
+  [key: string]: unknown;
+}
 
 type VoidCb = () => void;
 
@@ -29,13 +44,5 @@ export interface Route {
 }
 
 export interface HtmxEventDetail {
-  elt: Element;
-  target: Element;
-  detail: HtmxRequestConfig;
-  pathInfo: {
-    anchor?: string;
-    requestPath: string;
-    finalRequestPath: string;
-    responsePath: string | null;
-  };
+  ctx: HtmxRequestContext;
 }

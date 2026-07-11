@@ -1,6 +1,6 @@
 {
   "name": "htmx-client-routes",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Client-side routing extension for HTMX",
   "type": "module",
   "main": "dist/index.js",
@@ -17,10 +17,10 @@
   "author": "",
   "license": "MIT",
   "peerDependencies": {
-    "htmx.org": "^2.0.0"
+    "htmx.org": ">=4.0.0-beta.5 <5"
   },
   "devDependencies": {
-    "htmx.org": "^2.0.6",
+    "htmx.org": "4.0.0-beta5",
     "rimraf": "^5.0.5",
     "rollup": "^4.9.1",
     "rollup-plugin-terser": "^7.0.2",

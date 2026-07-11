@@ -15,6 +15,13 @@ Useful for prototyping, testing, or adding custom frontend logic before hitting 
 
 [HTMX with React](https://codepen.io/Andr-s-Moln-r-Trencs-r/pen/bNEVBmO)
 
+## Requirements
+
+- **htmx 4 is required** (peer dependency `htmx.org >=4.0.0-beta.5 <5`). This is a breaking change from the `1.x` line, which targeted htmx 2.
+- Note htmx 4 behavioral changes that may affect your app:
+  - **Error responses are now swapped.** htmx 4 swaps `4xx`/`5xx` responses by default (htmx 2 did not). Design your error responses to be valid swap content.
+  - **Explicit attribute inheritance.** htmx 4 does not inherit `hx-*` attributes implicitly by default. Set `htmx.config.implicitInheritance = true` to restore htmx 2 behavior if you rely on inheritance.
+
 ## Installation
 
 ### NPM

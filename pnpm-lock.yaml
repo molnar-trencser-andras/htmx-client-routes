@@ -46,8 +46,8 @@ importers:
         specifier: ^17.2.0
         version: 17.2.0
       htmx.org:
-        specifier: ^2.0.6
-        version: 2.0.8
+        specifier: 4.0.0-beta5
+        version: 4.0.0-beta5
       rimraf:
         specifier: ^6.0.1
         version: 6.1.2
@@ -1265,8 +1265,9 @@ packages:
   hermes-parser@0.25.1:
     resolution: {integrity: sha512-6pEjquH3rqaI6cYAXYPcz9MS4rY6R4ngRgrgfDshRptUZIc3lw0MCIJIGDj9++mfySOuPTHB4nrSW99BCvOPIA==}
 
-  htmx.org@2.0.8:
-    resolution: {integrity: sha512-fm297iru0iWsNJlBrjvtN7V9zjaxd+69Oqjh4F/Vq9Wwi2kFisLcrLCiv5oBX0KLfOX/zG8AUo9ROMU5XUB44Q==}
+  htmx.org@4.0.0-beta5:
+    resolution: {integrity: sha512-hIgrmD9GgLj0FRUZC5G9ZyUeGDca0Lk/QTqWQUmBsfbXxee3a3cTPmmkFzzVEEmtt7KZPGFJpRVJTH9FzP3pxQ==}
+    hasBin: true
 
   http-signature@1.4.0:
     resolution: {integrity: sha512-G5akfn7eKbpDN+8nPS/cb57YeA1jLTVxjpCj7tmm3QKPdyDy7T+qSC40e9ptydSWvkwjSXw1VbkpyEm39ukeAg==}
@@ -3227,7 +3228,7 @@ snapshots:
     dependencies:
       hermes-estree: 0.25.1
 
-  htmx.org@2.0.8: {}
+  htmx.org@4.0.0-beta5: {}
 
   http-signature@1.4.0:
     dependencies:
