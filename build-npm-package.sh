@@ -8,8 +8,9 @@ set -e
 echo "Building htmx-client-routes npm package..."
 
 # Install required dependencies
-echo "Installing dependencies..."
-pnpm install -D -w rimraf rollup rollup-plugin-terser rollup-plugin-typescript2
+# Dependencies (rollup, @rollup/plugin-terser, rollup-plugin-typescript2,
+# rimraf, typescript) are installed by the CI workflow via the lockfile.
+# Nothing to install here.
 
 # Clean dist directory
 echo "Cleaning dist directory..."
